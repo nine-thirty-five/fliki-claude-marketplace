@@ -1,0 +1,30 @@
+{
+  "name": "fliki",
+  "owner": {
+    "name": "Fliki",
+    "email": "support@fliki.ai"
+  },
+  "description": "Fliki for Claude: make images, video, music, speech, whole videos and templates from chat.",
+  "plugins": [
+    {
+      "name": "fliki",
+      "source": "./plugins/fliki",
+      "description": "Create images, video clips, music, speech, complete videos, audio, designs and your own templates with Fliki.",
+      "category": "productivity",
+      "keywords": [
+        "video",
+        "image",
+        "music",
+        "voiceover",
+        "text-to-speech",
+        "templates"
+      ],
+      "mcpServers": {
+        "fliki": {
+          "type": "http",
+          "url": "https://mcp.production.fliki.ai/mcp"
+        }
+      }
+    }
+  ]
+}
