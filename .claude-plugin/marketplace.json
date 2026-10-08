@@ -10,21 +10,7 @@
       "name": "fliki",
       "source": "./plugins/fliki",
       "description": "Create images, video clips, music, speech, complete videos, audio, designs and your own templates with Fliki.",
-      "category": "productivity",
-      "keywords": [
-        "video",
-        "image",
-        "music",
-        "voiceover",
-        "text-to-speech",
-        "templates"
-      ],
-      "mcpServers": {
-        "fliki": {
-          "type": "http",
-          "url": "https://mcp.production.fliki.ai/mcp"
-        }
-      }
+      "category": "productivity"
     }
   ]
 }
