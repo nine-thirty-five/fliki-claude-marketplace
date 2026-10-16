@@ -23,6 +23,7 @@ be replaced, cropped or trimmed; type every node for what it is.
   or a raw id; a file writes those catalogue ids raw (see the files guide).
   `overlay` layers are not available in packages.
 - `volume` is 0–100 (absent = 100); a music bed usually sits near 15–25.
+- `speed` is a percent too, 25–400 (absent = 100): 50 plays a clip at half speed, never `0.5`.
 
 ## Text
 
