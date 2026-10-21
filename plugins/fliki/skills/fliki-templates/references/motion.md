@@ -88,7 +88,7 @@ It replaces that layer's own `gsap` tweens.
 
 | field | values |
 |---|---|
-| `kind` | `none`, `blur`, `clock`, `fade`, `flip`, `slide`, `wipe`, `zoom` |
+| `kind` | `none`, `blur`, `clock`, `fade`, `flip`, `slide`, `wipe`, `zoom`, `custom` (with `spec`) |
 | `direction` | `slide`/`flip`: `fromLeft`, `fromTop`, `fromRight`, `fromBottom`; `wipe`: those plus `fromTopLeft`, `fromTopRight`, `fromBottomRight`, `fromBottomLeft`; `zoom`: `in`, `out` |
 | `duration` | seconds — 0.5 short, 1 medium, 1.5 long |
 | `ease` | `linear`, `spring` |
@@ -96,6 +96,48 @@ It replaces that layer's own `gsap` tweens.
 
 Other names (`dissolve`, `push`, `circle-wipe`) are refused: map `dissolve` → `fade`, a push →
 `slide`. The transition does not eat into the scene's narration.
+
+### Custom transitions
+
+Prefer a named kind. When none gives the look asked for (a diagonal wipe with a blur, an iris,
+blinds), use `kind: "custom"` and describe it in `spec`; `spec` is ignored on any other kind.
+
+```json
+"transition": { "kind": "custom", "duration": 0.8, "spec": { "name": "Blur wipe",
+  "enter": { "look": { "reveal": { "shape": "linear", "angle": 135, "amount": 0, "feather": 8 }, "blur": 2 } } } }
+```
+
+Both scenes are flat pictures. `enter` animates the incoming scene FROM its `look` to normal;
+`exit` animates the outgoing scene from normal TO its `look`. A track takes an optional `ease` (GSAP
+name, default `power2.inOut`) and `keys` — stops with `at` strictly between 0 and 1. The incoming
+scene paints on top unless `top: "exit"`. `plates` are solid colour panels
+(`{ color, layer?: "over" | "between", keys: [{ at, x, y, w, h, ease? }] }`) that need keys at 0 and
+1 and must be off canvas or transparent at both. `name` labels it in the editor.
+
+Look fields — positions and sizes % of the canvas, angles degrees:
+- `opacity` 0..1 · `x`, `y` · `scale`, `scaleX`, `scaleY` · `rotate` · `rotateX`, `rotateY` (3D;
+  `perspective` px) · `skewX`, `skewY` · `originX`, `originY` (default 50)
+- `blur` 0..4 (% of the short side) · `brightness`, `contrast`, `saturate` (1 = unchanged) ·
+  `grayscale` 0..1 · `hue` degrees · `tint: { color: "#hex", amount: 0..1 }`
+- `reveal` — the visible part of the scene, `amount` 0..1 visible:
+  - `{ shape: "linear", angle, amount, feather? }` — a wipe; `angle` is the way the edge travels
+    (90 left→right, 180 top→bottom)
+  - `{ shape: "radial", cx, cy, r, feather?, invert? }` — an iris; `r` % of the diagonal (100
+    covers the frame); `invert` shows the scene outside the circle
+  - `{ shape: "inset", top, right, bottom, left, round? }` — a rectangle
+  - `{ shape: "polygon", points: [{ x, y }, …] }` — same point count in every key
+  - `{ shape: "bands", axis: "x" | "y", count, amount, stagger? }` — blinds
+  - `{ shape: "cells", cols, rows, amount, stagger?, order?: "rows" | "diagonal" | "center" | "random" }`
+
+More specs:
+
+```
+{ "name": "Iris close", "enter": { "look": { "reveal": { "shape": "radial", "cx": 50, "cy": 50, "r": 100, "invert": true } } },
+  "exit": { "look": { "scale": 0.9 } } }
+{ "name": "Blinds", "enter": { "look": { "reveal": { "shape": "bands", "axis": "y", "count": 8, "amount": 0, "stagger": 0.4 } } } }
+```
+
+Not possible: per-pixel effects (pixelate, ripple, page curl) or a scene breaking apart (shatter).
 
 ## Patterns
 

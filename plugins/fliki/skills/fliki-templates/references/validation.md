@@ -90,9 +90,11 @@ introduces — faults already in the file are reported by `file_read`, not held 
 | `gsap.labelMissing` | `at: "name+=…"` uses a label not in `labels`. |
 | `gsap.unknownPart` (w) | That layer type has no such part (see motion.md). |
 | `gsap.overrun` (w) | The tween ends after `customDuration`. Shorten it or start it earlier. |
-| `transition.unknownKind` | Use `none blur clock fade flip slide wipe zoom`. |
+| `transition.unknownKind` | Use `none blur clock fade flip slide wipe zoom`, or `custom` with a `spec`. |
 | `transition.unknownSfx`, `unknownEase` (w) | Keys in motion.md. |
 | `transition.trailing` (w) | Remove the last scene's transition. |
+| `transition.customNoSpec` | `kind: "custom"` without a `spec` plays as a plain fade. Add the spec (motion.md) or pick a named kind. |
+| `transition.specIgnored` (w) | `spec` on a named kind is ignored. Set `kind: "custom"` or drop the spec. |
 
 ## Narration, slots, presenters
 

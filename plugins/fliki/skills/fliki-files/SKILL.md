@@ -171,7 +171,9 @@ music bed, an ambience, a sound effect at an absolute time.
 - Every scene paints its ground (`style.backgroundColor` or a full-bleed picture) unless a common
   backdrop is meant to show through it, and `common.style.backgroundColor` is the file's.
 - Motion: transforms, opacity and filter only; `cw`/`ch` distances; nothing timed from the scene's
-  end — narration decides it. Use `transition` between scenes.
+  end — narration decides it. Use `transition` between scenes: a named kind (`fade`, `slide`,
+  `wipe`…) when one fits, else `kind: "custom"` with a `spec` — the shape and examples are in the
+  templates guide's `motion` reference (Custom transitions).
 - Colours as 6/8-digit hex. Fonts by catalogue key (`montserrat`, `playFairDisplay`).
 - The safety rules in the templates guide apply unchanged (allowed tags, attributes, css urls).
   A `fliki-media:` ref is media already in the file: keep it exactly as read. Add new media with

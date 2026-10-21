@@ -94,7 +94,9 @@ description: { "<ratio>": brief }, silent? }`, `layers { "<id>": layer }`, `css?
 - **B-roll**: `meta.broll: true` on a narrated scene's main picture — the only way videos from the
   template get cutaway shots. Hold tiles, logos, portraits.
 - **Motion**: transforms, opacity, filter; `cw`/`ch` distances; finite repeats; nothing timed from
-  the scene's end (narration resizes scenes) — use `transition` for the boundary.
+  the scene's end (narration resizes scenes) — use `transition` for the boundary. Prefer a named
+  kind; `kind: "custom"` with a `spec` draws any wipe, iris or blinds a named kind can't
+  ([motion](references/motion.md#custom-transitions)).
 - **Colours** as 6/8-digit hex, so palette switching reaches them.
 
 ## Safety rules (always refused)
